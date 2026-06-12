@@ -1,0 +1,17 @@
+{
+  "name": "learn-modern-java-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^6.1.3"
+  }
+}
