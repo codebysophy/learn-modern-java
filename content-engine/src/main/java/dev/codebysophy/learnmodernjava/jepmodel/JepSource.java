@@ -1,4 +1,4 @@
-package dev.codebysophy.learnmodernjava;
+package dev.codebysophy.learnmodernjava.jepmodel;
 
 import java.net.URI;
 
@@ -13,8 +13,11 @@ public record JepSource(int number, URI url) {
         if (!"https".equals(url.getScheme()) || !"openjdk.org".equals(url.getHost())) {
             throw new IllegalArgumentException("JEP source must come from https://openjdk.org.");
         }
-        if (!url.getPath().equals("/jeps/" + number)) {
+        if (!("/jeps/" + number).equals(url.getPath())) {
             throw new IllegalArgumentException("JEP source URL path must match the JEP number.");
+        }
+        if (url.getQuery() != null || url.getFragment() != null) {
+            throw new IllegalArgumentException("JEP source URL must be canonical and omit query strings and fragments.");
         }
     }
 

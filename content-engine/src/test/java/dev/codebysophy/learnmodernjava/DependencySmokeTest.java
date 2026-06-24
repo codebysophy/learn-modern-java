@@ -1,10 +1,14 @@
 package dev.codebysophy.learnmodernjava;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import dev.codebysophy.learnmodernjava.jepmodel.JepSource;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 
+import java.net.URI;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class DependencySmokeTest {
     @Test
@@ -33,5 +37,17 @@ class DependencySmokeTest {
     @Test
     void buildsOfficialJepUrls() {
         assertEquals("https://openjdk.org/jeps/444", JepSource.official(444).url().toString());
+    }
+
+    @Test
+    void rejectsJepUrlsWithQueryStrings() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new JepSource(444, URI.create("https://openjdk.org/jeps/444?view=raw")));
+    }
+
+    @Test
+    void rejectsJepUrlsWithFragments() {
+        assertThrows(IllegalArgumentException.class,
+                () -> new JepSource(444, URI.create("https://openjdk.org/jeps/444#summary")));
     }
 }
