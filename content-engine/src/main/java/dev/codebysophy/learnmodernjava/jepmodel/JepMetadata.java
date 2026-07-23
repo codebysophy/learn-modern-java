@@ -11,6 +11,7 @@ public record JepMetadata(
         Optional<String> status,
         Optional<String> release,
         Optional<String> component,
+        Optional<String> discussion,
         Optional<String> created,
         Optional<String> updated
 ) {
